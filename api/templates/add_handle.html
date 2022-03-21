@@ -1,0 +1,19 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+  <div class="container">
+  <h3>Please provide a twitter handle</h3>
+  <p>We are looking for natural products related journals.</p>
+<hr>
+<form action="" method="post" class="form" role="form">
+  {{ form.csrf_token() }}
+ <d1>
+  {{ wtf.form_field(form.journal_name, class='form-control',
+  placeholder='Analytical Chemistry') }}
+  {{ wtf.form_field(form.twitter, class='form-control', placeholder='an_chem') }}
+ </d1>
+ <p><input type=submit class='btn btn-warning btn-block'>
+</form>
+<hr>
+</div>
+{% endblock %}

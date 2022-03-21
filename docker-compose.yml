@@ -1,0 +1,60 @@
+version: "3.4"
+
+services:
+  redis:
+    env_file:
+      - ".env"
+    image: "redis:5.0.4-stretch"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    stop_grace_period: "${DOCKER_STOP_GRACE_PERIOD:-3s}"
+    volumes:
+      - "redis:/data"
+
+  web:
+    build:
+      context: "."
+    depends_on:
+      - "redis"
+    env_file:
+      - ".env"
+    ports:
+      - "5000:5000"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    volumes:
+      - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
+      - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+
+  tasks:
+    build:
+      context: "."
+      args:
+        - "FLASK_ENV=${FLASK_ENV:-production}"
+    command: celery beat -A api.tasks.app --logfile=api/logs/celery_beat.log
+    depends_on:
+      - "redis"
+    env_file:
+      - ".env"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    volumes:
+      - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
+      - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+
+  worker:
+    build:
+      context: "."
+      args:
+        - "FLASK_ENV=${FLASK_ENV:-production}"
+    command: celery worker -A api.tasks.app --logfile=api/logs/celery.log
+    depends_on:
+      - "redis"
+    env_file:
+      - ".env"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    volumes:
+      - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
+      - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+
+
+volumes:
+  redis: {}
+

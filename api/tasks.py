@@ -1,0 +1,95 @@
+import celery
+from celery.schedules import crontab
+import os
+import time
+from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+from email.mime.text import MIMEText
+
+from config.settings import EMAIL, PASSWORD
+
+#app = celery.Celery('tasks', backend='redis://localhost:6379/0',
+#                    broker='redis://localhost:6379/0')
+
+app = celery.Celery('tasks', backend='redis://redis:6379/0',
+                broker='redis://redis:6379/0')
+
+def sendEmail(email, password, message, recipient,
+              subject, fl=None):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+	#server.starttls()
+        server.connect("smtp.gmail.com",587)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(email, password)
+
+        msg = MIMEMultipart()
+        msg['From'] = email
+        msg['To'] = recipient
+        msg['Subject'] = subject
+
+        part1 = MIMEText(message, 'plain')
+        msg.attach(part1)
+        if fl:
+            with open(fl, "rb") as fil:
+                part = MIMEApplication(
+                    fil.read(),
+                    Name=basename(fl)
+                )
+            # After the file is closed
+            part['Content-Disposition'] = 'attachment; filename="%s"' % basename(fl)
+            msg.attach(part)
+
+        server.sendmail(email, recipient, msg.as_string())
+        server.quit()
+
+
+@app.task(name='scan_cnpq')
+def scan_cnpq():
+    # Chamadas Públicas abertas
+    print('Scanning cnpq %s' % datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+    site = 'http://memoria2.cnpq.br/web/guest/chamadas-publicas?p_p_id=resultadosportlet_WAR_resultadoscnpqportlet_INSTANCE_0ZaM&filtro=abertas/'
+
+    response = requests.get(site)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    ol = soup.ol
+    titles = [x.getText() for x in ol.findAll('h4')]
+    description = [x.getText() for x in ol.findAll('p')]
+    dates = [x.getText() for x in ol.find_all("ul", {"class": "datas"})]
+
+    old_html = 'api/data/chamadas_abertas.html'
+
+    if os.path.isfile(old_html):
+        with open(old_html) as f:
+            txt = f.read()
+        old_soup = BeautifulSoup(txt, 'html.parser')
+        old_ol = old_soup.ol
+        old_titles = [x.getText() for x in old_ol.findAll('h4')]
+    else:
+        old_titles = []
+
+    if set(titles)-set(old_titles):
+        msg = []
+        for i in range(len(dates)):
+            msg.append('\n'.join([titles[i], description[i], dates[i]]))
+        msg = '\n'.join(msg)
+        subject = 'CNPq grant update'
+        sendEmail(EMAIL, PASSWORD, msg, EMAIL, subject)
+        with open(old_html, "w+") as f:
+            f.write(str(ol))
+
+# add "watchdog" task to the beat schedule
+app.conf.beat_schedule = {
+    "scan_twitter-task": {
+        "task": "scan_cnpq",
+         #"schedule": crontab(minute="*/10")
+        "schedule": crontab(minute="10", hour="15", day_of_week='*',
+                            day_of_month='*', month_of_year='*')
+    }
+}
+
