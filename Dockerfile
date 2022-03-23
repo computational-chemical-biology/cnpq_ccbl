@@ -12,6 +12,6 @@ ENV PATH /opt/conda/envs/ccbl_cnpq/bin:$PATH
 
 COPY . .
 
-CMD gunicorn -b 0.0.0.0:5050 --access-logfile - "api.application:application"
+CMD gunicorn -b 0.0.0.0:5050 --access-logfile - "api.routes:application"
 #CMD ["gunicorn", "-c", "python:config.gunicorn", "api.upload:app"]
 

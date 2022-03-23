@@ -2,15 +2,22 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
   <div class="container">
-  <h3>Please provide a twitter handle</h3>
-  <p>We are looking for natural products related journals.</p>
+  <h3>Please provide a contact info</h3>
+  <p>We will email the confirmation.</p>
 <hr>
+
+  {%- for category, message in get_flashed_messages(with_categories = true) %}
+     <div class = "alert alert-danger">
+        {{ message }}
+     </div>
+  {%- endfor %}
+
 <form action="" method="post" class="form" role="form">
   {{ form.csrf_token() }}
  <d1>
-  {{ wtf.form_field(form.journal_name, class='form-control',
-  placeholder='Analytical Chemistry') }}
-  {{ wtf.form_field(form.twitter, class='form-control', placeholder='an_chem') }}
+  {{ wtf.form_field(form.name, class='form-control',
+  placeholder='Your name') }}
+  {{ wtf.form_field(form.email, class='form-control', placeholder='Yourn email') }}
  </d1>
  <p><input type=submit class='btn btn-warning btn-block'>
 </form>

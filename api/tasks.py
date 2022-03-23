@@ -5,49 +5,16 @@ import time
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.application import MIMEApplication
-from email.mime.text import MIMEText
-
 from config.settings import EMAIL, PASSWORD
+from api.cnpq_methods import sendEmail
+from api import db
+from api.models import Recipient
 
 #app = celery.Celery('tasks', backend='redis://localhost:6379/0',
 #                    broker='redis://localhost:6379/0')
 
 app = celery.Celery('tasks', backend='redis://redis:6379/0',
                 broker='redis://redis:6379/0')
-
-def sendEmail(email, password, message, recipient,
-              subject, fl=None):
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-	#server.starttls()
-        server.connect("smtp.gmail.com",587)
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-        server.login(email, password)
-
-        msg = MIMEMultipart()
-        msg['From'] = email
-        msg['To'] = recipient
-        msg['Subject'] = subject
-
-        part1 = MIMEText(message, 'plain')
-        msg.attach(part1)
-        if fl:
-            with open(fl, "rb") as fil:
-                part = MIMEApplication(
-                    fil.read(),
-                    Name=basename(fl)
-                )
-            # After the file is closed
-            part['Content-Disposition'] = 'attachment; filename="%s"' % basename(fl)
-            msg.attach(part)
-
-        server.sendmail(email, recipient, msg.as_string())
-        server.quit()
-
 
 @app.task(name='scan_cnpq')
 def scan_cnpq():
@@ -79,7 +46,8 @@ def scan_cnpq():
             msg.append('\n'.join([titles[i], description[i], dates[i]]))
         msg = '\n'.join(msg)
         subject = 'CNPq grant update'
-        sendEmail(EMAIL, PASSWORD, msg, EMAIL, subject)
+        recipients = [x.email for x in db.session.query(Recipient).all()]
+        sendEmail(EMAIL, PASSWORD, msg, recipients, subject)
         with open(old_html, "w+") as f:
             f.write(str(ol))
 
