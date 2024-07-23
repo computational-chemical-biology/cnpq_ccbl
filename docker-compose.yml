@@ -23,6 +23,7 @@ services:
     volumes:
       - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
       - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+      - "${DOCKER_WEB_VOLUME:-./api/db.sqlite3:/ccbl_cnpq/api/db.sqlite3}"
 
   tasks:
     build:
@@ -38,6 +39,7 @@ services:
     volumes:
       - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
       - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+      - "${DOCKER_WEB_VOLUME:-./api/db.sqlite3:/ccbl_cnpq/api/db.sqlite3}"
 
   worker:
     build:
@@ -53,6 +55,7 @@ services:
     volumes:
       - "${DOCKER_WEB_VOLUME:-./api/data:/ccbl_cnpq/api/data}"
       - "${DOCKER_WEB_VOLUME:-./api/logs:/ccbl_cnpq/api/logs}"
+      - "${DOCKER_WEB_VOLUME:-./api/db.sqlite3:/ccbl_cnpq/api/db.sqlite3}"
 
 
 volumes:

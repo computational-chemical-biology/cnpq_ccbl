@@ -47,7 +47,7 @@ def scan_cnpq():
         msg = '\n'.join(msg)
         subject = 'CNPq grant update'
         for x in db.session.query(Recipient).all():
-            sendEmail(EMAIL, PASSWORD, msg, x.email, subject)
+            sendEmail(EMAIL, PASSWORD, msg, [x.email], subject)
         with open(old_html, "w+") as f:
             f.write(str(ol))
 
