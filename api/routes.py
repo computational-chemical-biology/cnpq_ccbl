@@ -35,6 +35,13 @@ def update_recipient():
         sendEmail(EMAIL, PASSWORD, msg, [form.email.data], subject)
         return redirect(url_for('update_recipient'))
 
+@application.route('/unsubscribe/<userid>', methods=['GET', 'POST'])
+def unsubscribe(userid):
+    Recipient.query.filter_by(userid=userid).delete()
+    db.session.commit()
+    return "You were successfully unsubscribed!" 
+
+
 #if __name__ == '__main__':
 #    application.run()
 #    application.run(host='0.0.0.0', debug=True)
