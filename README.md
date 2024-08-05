@@ -1,6 +1,6 @@
 ## CCBL bot 
 
-This repository hosts the data and code for CCBL bot. The goals project is to teach the use of different tools in a interactive way, creating bot to retrieve and communicate information relevant to CCBL.
+This repository hosts the data and code for CCBL bot. The goal of this project is to teach the use of different tools in a interactive way, creating bots to retrieve and communicate information relevant to CCBL.
 
 
 1. Install a conda environment:
