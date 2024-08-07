@@ -49,8 +49,8 @@ def scan_cnpq():
         subject = 'CNPq grant update'
         for x in db.session.query(Recipient).all():
             utxt = f'Click here<http://ccbl.fcfrp.usp.br:5050/unsubscribe/{x.id}> to unsubscribe.'
-            msg = msg+'\n'+utxt
-            sendEmail(EMAIL, PASSWORD, msg, [x.email], subject)
+            umsg = msg+'\n'+utxt
+            sendEmail(EMAIL, PASSWORD, umsg, [x.email], subject)
         with open(old_html, "w+") as f:
             f.write(str(ol))
 

@@ -37,9 +37,14 @@ def update_recipient():
 
 @application.route('/unsubscribe/<userid>', methods=['GET', 'POST'])
 def unsubscribe(userid):
-    Recipient.query.filter_by(id=userid).delete()
-    db.session.commit()
-    return "You were successfully unsubscribed!" 
+    o = Recipient.query.filter_by(id=userid)
+    if o.all():
+        o.delete()
+        db.session.commit()
+        return "You were successfully unsubscribed!" 
+    else:
+        return "User id not found!" 
+
 
 
 #if __name__ == '__main__':

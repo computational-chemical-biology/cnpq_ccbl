@@ -3670,3 +3670,7 @@ smtplib.SMTPRecipientsRefused: {'r, s, i, l, v, a, b, i, o, i, n, f, o, @, g, m,
 [2024-07-31 15:10:00,098: WARNING/ForkPoolWorker-1] Scanning cnpq 07/31/2024, 15:10:00
 [2024-08-01 15:10:00,082: WARNING/ForkPoolWorker-1] Scanning cnpq 08/01/2024, 15:10:00
 [2024-08-02 15:10:00,093: WARNING/ForkPoolWorker-1] Scanning cnpq 08/02/2024, 15:10:00
+[2024-08-03 15:10:00,048: WARNING/ForkPoolWorker-1] Scanning cnpq 08/03/2024, 15:10:00
+[2024-08-04 15:10:00,007: WARNING/ForkPoolWorker-1] Scanning cnpq 08/04/2024, 15:10:00
+[2024-08-05 15:10:00,097: WARNING/ForkPoolWorker-1] Scanning cnpq 08/05/2024, 15:10:00
+[2024-08-06 15:10:00,062: WARNING/ForkPoolWorker-1] Scanning cnpq 08/06/2024, 15:10:00
