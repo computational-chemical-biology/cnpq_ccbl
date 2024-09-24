@@ -19,6 +19,7 @@ app = celery.Celery('tasks', backend='redis://redis:6379/0',
 def scan_cnpq():
     # Chamadas Públicas abertas
     print('Scanning cnpq %s' % datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+    site = 'http://memoria2.cnpq.br/web/guest/chamadas-publicas?p_p_id=resultadosportlet_WAR_resultadoscnpqportlet_INSTANCE_0ZaM&filtro=abertas/'
     titles, description, dates = seleniumReport()
     old_txt = 'api/data/chamadas_abertas.txt'
 

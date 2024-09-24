@@ -1,0 +1,1218 @@
+[2024-09-19 15:10:00,789: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 203, in _publish
+    mandatory=mandatory, immediate=immediate,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 608, in basic_publish
+    return self._put(routing_key, message, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 789, in _put
+    client.lpush(self._q_for_pri(queue, pri), dumps(message))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 1963, in lpush
+    return self.execute_command("LPUSH", name, *values)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+[2024-09-20 15:10:00,662: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in _publish
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in <listcomp>
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 102, in maybe_declare
+    return maybe_declare(entity, self.channel, retry, **retry_policy)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 121, in maybe_declare
+    return _maybe_declare(entity, channel)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 160, in _maybe_declare
+    raise RecoverableConnectionError('channel disconnected')
+amqp.exceptions.RecoverableConnectionError: channel disconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+[2024-09-21 15:10:00,672: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in _publish
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in <listcomp>
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 102, in maybe_declare
+    return maybe_declare(entity, self.channel, retry, **retry_policy)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 121, in maybe_declare
+    return _maybe_declare(entity, channel)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 160, in _maybe_declare
+    raise RecoverableConnectionError('channel disconnected')
+amqp.exceptions.RecoverableConnectionError: channel disconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+[2024-09-22 15:10:00,704: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in _publish
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in <listcomp>
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 102, in maybe_declare
+    return maybe_declare(entity, self.channel, retry, **retry_policy)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 121, in maybe_declare
+    return _maybe_declare(entity, channel)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 160, in _maybe_declare
+    raise RecoverableConnectionError('channel disconnected')
+amqp.exceptions.RecoverableConnectionError: channel disconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+[2024-09-23 15:10:00,708: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in _publish
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in <listcomp>
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 102, in maybe_declare
+    return maybe_declare(entity, self.channel, retry, **retry_policy)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 121, in maybe_declare
+    return _maybe_declare(entity, channel)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 160, in _maybe_declare
+    raise RecoverableConnectionError('channel disconnected')
+amqp.exceptions.RecoverableConnectionError: channel disconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+[2024-09-24 15:10:00,713: ERROR/MainProcess] Message Error: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+['  File "/opt/conda/envs/ccbl_cnpq/bin/celery", line 8, in <module>\n    sys.exit(main())\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/__main__.py", line 16, in main\n    _main()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 322, in main\n    cmd.execute_from_commandline(argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 496, in execute_from_commandline\n    super(CeleryCommand, self).execute_from_commandline(argv)))\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 298, in execute_from_commandline\n    return self.handle_argv(self.prog_name, argv[1:])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 488, in handle_argv\n    return self.execute(command, argv)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/celery.py", line 420, in execute\n    ).run_from_argv(self.prog_name, argv[1:], command=argv[0])\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 302, in run_from_argv\n    sys.argv if argv is None else argv, command)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 386, in handle_argv\n    return self(*args, **options)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/base.py", line 252, in __call__\n    ret = self.run(*args, **kwargs)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/bin/beat.py", line 109, in run\n    return beat().run()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 81, in run\n    self.start_scheduler()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/apps/beat.py", line 109, in start_scheduler\n    service.start()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 597, in start\n    interval = self.scheduler.tick()\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 312, in tick\n    self.apply_entry(entry, producer=self.producer)\n', '  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 245, in apply_entry\n    exc, traceback.format_stack(), exc_info=True)\n']
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 533, in _ensured
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in _publish
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 194, in <listcomp>
+    [maybe_declare(entity) for entity in declare]
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 102, in maybe_declare
+    return maybe_declare(entity, self.channel, retry, **retry_policy)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 121, in maybe_declare
+    return _maybe_declare(entity, channel)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/common.py", line 160, in _maybe_declare
+    raise RecoverableConnectionError('channel disconnected')
+amqp.exceptions.RecoverableConnectionError: channel disconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 921, in create_channel
+    return self._avail_channels.pop()
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+kombu.exceptions.OperationalError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 242, in apply_entry
+    result = self.apply_async(entry, producer=producer, advance=False)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 367, in apply_async
+    entry, exc=exc)), sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/beat.py", line 359, in apply_async
+    **entry.options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/task.py", line 570, in apply_async
+    **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/base.py", line 756, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/amqp.py", line 552, in send_task_message
+    **properties
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/messaging.py", line 181, in publish
+    exchange_name, declare,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 566, in _ensured
+    errback and errback(exc, 0)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/contextlib.py", line 130, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 459, in _reraise_as_library_errors
+    sys.exc_info()[2])
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/vine/five.py", line 194, in reraise
+    raise value.with_traceback(tb)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 454, in _reraise_as_library_errors
+    yield
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 554, in _ensured
+    reraise_as_library_errors=False,
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 445, in _ensure_connection
+    callback, timeout=timeout
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/utils/functional.py", line 344, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 874, in _connection_factory
+    self._connection = self._establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/connection.py", line 809, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 941, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/virtual/base.py", line 923, in create_channel
+    channel = self.Channel(connection)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/kombu/transport/redis.py", line 522, in __init__
+    self.client.ping()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/commands/core.py", line 954, in ping
+    return self.execute_command("PING", **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1180, in execute_command
+    lambda error: self._disconnect_raise(conn, error),
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1178, in <lambda>
+    conn, command_name, *args, **options
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/client.py", line 1152, in _send_command_parse_response
+    conn.send_command(*args)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 796, in send_command
+    self.pack_command(*args), check_health=kwargs.get("check_health", True)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 772, in send_packed_command
+    self.check_health()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 764, in check_health
+    self.retry.call_with_retry(self._send_ping, self._ping_failed)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/retry.py", line 45, in call_with_retry
+    return do()
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 754, in _send_ping
+    if str_if_bytes(self.read_response()) != "PONG":
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/redis/connection.py", line 829, in read_response
+    raise response
+celery.beat.SchedulingError: Couldn't apply scheduled task scan_twitter-task: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
