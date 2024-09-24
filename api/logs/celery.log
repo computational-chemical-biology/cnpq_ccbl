@@ -3674,3 +3674,23 @@ smtplib.SMTPRecipientsRefused: {'r, s, i, l, v, a, b, i, o, i, n, f, o, @, g, m,
 [2024-08-04 15:10:00,007: WARNING/ForkPoolWorker-1] Scanning cnpq 08/04/2024, 15:10:00
 [2024-08-05 15:10:00,097: WARNING/ForkPoolWorker-1] Scanning cnpq 08/05/2024, 15:10:00
 [2024-08-06 15:10:00,062: WARNING/ForkPoolWorker-1] Scanning cnpq 08/06/2024, 15:10:00
+[2024-09-21 15:10:00,036: WARNING/ForkPoolWorker-15] Scanning cnpq 09/21/2024, 15:10:00
+[2024-09-21 15:10:00,532: ERROR/ForkPoolWorker-15] Task scan_cnpq[a1a90fc7-4beb-416d-9765-13b83fdfd9d6] raised unexpected: AttributeError("'NoneType' object has no attribute 'findAll'")
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/trace.py", line 648, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/ccbl_cnpq/api/tasks.py", line 28, in scan_cnpq
+    titles = [x.getText() for x in ol.findAll('h4')]
+AttributeError: 'NoneType' object has no attribute 'findAll'
+[2024-09-22 15:10:00,091: WARNING/ForkPoolWorker-1] Scanning cnpq 09/22/2024, 15:10:00
+[2024-09-22 15:10:00,388: ERROR/ForkPoolWorker-1] Task scan_cnpq[f7df88f3-652d-4512-90b3-3443c0ae5e1d] raised unexpected: AttributeError("'NoneType' object has no attribute 'findAll'")
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/opt/conda/envs/ccbl_cnpq/lib/python3.7/site-packages/celery/app/trace.py", line 648, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/ccbl_cnpq/api/tasks.py", line 28, in scan_cnpq
+    titles = [x.getText() for x in ol.findAll('h4')]
+AttributeError: 'NoneType' object has no attribute 'findAll'
