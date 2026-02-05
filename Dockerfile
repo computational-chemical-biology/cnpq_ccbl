@@ -14,6 +14,7 @@ RUN /bin/bash /tmp/miniconda.sh -b -p /opt/conda && \
 ENV PATH /opt/conda/bin:$PATH
 
 COPY environment.yml environment.yml
+ENV CONDA_PLUGINS_AUTO_ACCEPT_TOS=true
 RUN conda env create -f environment.yml
 RUN echo "source activate ccbl_cnpq" > ~/.bashrc
 ENV PATH /opt/conda/envs/ccbl_cnpq/bin:$PATH
